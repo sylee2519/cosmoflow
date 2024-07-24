@@ -1,0 +1,336 @@
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"305879": {"average_memory_usage": 4653.923371787383, "min_memory_usage": 2840.84375, "max_memory_usage": 4722.63671875}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"305879": {"average_memory_usage": 4704.215790719697, "min_memory_usage": 2858.35546875, "max_memory_usage": 4830.4296875}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"305879": {"average_memory_usage": 4669.102509469697, "min_memory_usage": 2852.14453125, "max_memory_usage": 4758.66796875}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"305879": {"average_memory_usage": 4716.843400186567, "min_memory_usage": 2855.35546875, "max_memory_usage": 4806.3984375}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"305879": {"average_memory_usage": 5678.366358901515, "min_memory_usage": 2855.359375, "max_memory_usage": 5820.74609375}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"305879": {"average_memory_usage": 5693.901396780303, "min_memory_usage": 2853.734375, "max_memory_usage": 5829.1640625}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"305879": {"average_memory_usage": 5684.862560096154, "min_memory_usage": 2861.18359375, "max_memory_usage": 5834.86328125}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"305879": {"average_memory_usage": 7657.16875, "min_memory_usage": 2857.93359375, "max_memory_usage": 7967.69921875}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"305879": {"average_memory_usage": 7619.491498161765, "min_memory_usage": 2851.8671875, "max_memory_usage": 7949.109375}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"305879": {"average_memory_usage": 7668.386427238806, "min_memory_usage": 2857.2109375, "max_memory_usage": 7968.43359375}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 4}
+{"305879": {"average_memory_usage": 7683.352272727273, "min_memory_usage": 2858.375, "max_memory_usage": 7974.04296875}}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 8}
+{"305879": {"average_memory_usage": 11546.557587594696, "min_memory_usage": 2859.33984375, "max_memory_usage": 12254.515625}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 1}
+{"305879": {"average_memory_usage": 9188.445209703947, "min_memory_usage": 5341.77734375, "max_memory_usage": 9494.62890625}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 2}
+{"305879": {"average_memory_usage": 9214.500102796053, "min_memory_usage": 5352.83984375, "max_memory_usage": 9502.8046875}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"305879": {"average_memory_usage": 9204.966488486842, "min_memory_usage": 5346.73828125, "max_memory_usage": 9552.91796875}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"305879": {"average_memory_usage": 9180.18513569079, "min_memory_usage": 5337.1953125, "max_memory_usage": 9466.6171875}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 1}
+{"305879": {"average_memory_usage": 9151.030580357143, "min_memory_usage": 5336.2734375, "max_memory_usage": 9450.06640625}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 2}
+{"305879": {"average_memory_usage": 9164.551106770834, "min_memory_usage": 5331.296875, "max_memory_usage": 9490.91015625}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 4}
+{"305879": {"average_memory_usage": 11127.16127232143, "min_memory_usage": 5337.57421875, "max_memory_usage": 11617.3359375}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 8}
+{"305879": {"average_memory_usage": 11114.897209821429, "min_memory_usage": 5343.00390625, "max_memory_usage": 11601.98828125}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 1}
+{"305879": {"average_memory_usage": 11105.230891047297, "min_memory_usage": 5337.9296875, "max_memory_usage": 11575.90625}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 2}
+{"305879": {"average_memory_usage": 14660.08445945946, "min_memory_usage": 5333.1875, "max_memory_usage": 15821.96875}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 4}
+{"305879": {"average_memory_usage": 14861.069661458334, "min_memory_usage": 5333.07421875, "max_memory_usage": 15802.4453125}}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 8}
+{"305879": {"average_memory_usage": 21816.78783482143, "min_memory_usage": 5339.95703125, "max_memory_usage": 24266.41015625}}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 3, "ntasks": 3, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 1}
+{"305879": {"average_memory_usage": 17451.528586647728, "min_memory_usage": 9967.33984375, "max_memory_usage": 18388.84765625}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 2}
+{"305879": {"average_memory_usage": 17458.065696022728, "min_memory_usage": 9969.890625, "max_memory_usage": 18396.98828125}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 4}
+{"305879": {"average_memory_usage": 17587.254261363636, "min_memory_usage": 9988.20703125, "max_memory_usage": 18574.875}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 8}
+{"305879": {"average_memory_usage": 17484.752840909092, "min_memory_usage": 9981.5390625, "max_memory_usage": 18429.28125}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 1}
+{"305879": {"average_memory_usage": 21057.967447916668, "min_memory_usage": 10004.015625, "max_memory_usage": 22642.51171875}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 2}
+{"305879": {"average_memory_usage": 21088.39453125, "min_memory_usage": 10031.8125, "max_memory_usage": 22666.04296875}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 4}
+{"305879": {"average_memory_usage": 21029.889508928572, "min_memory_usage": 10003.8359375, "max_memory_usage": 22625.3671875}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 8}
+{"305879": {"average_memory_usage": 27899.54910714286, "min_memory_usage": 9981.40625, "max_memory_usage": 31132.7734375}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 1}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 1}
+{"305879": {"average_memory_usage": 26720.55486505682, "min_memory_usage": 9983.33203125, "max_memory_usage": 31097.609375}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 2}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 2}
+{"305879": {"average_memory_usage": 27891.848899147728, "min_memory_usage": 9978.21875, "max_memory_usage": 31181.796875}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 4}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 4}
+{"305879": {"average_memory_usage": 27771.85621279762, "min_memory_usage": 10012.69140625, "max_memory_usage": 31210.4921875}}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 8}
+{"nodes": 1, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 8}
+{"305879": {"average_memory_usage": 39725.45331101191, "min_memory_usage": 9984.08203125, "max_memory_usage": 48030.9296875}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 1}
+{"305879": {"average_memory_usage": 4958.495973557692, "min_memory_usage": 3041.1796875, "max_memory_usage": 5106.0390625}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 2}
+{"305879": {"average_memory_usage": 4908.867513020833, "min_memory_usage": 3030.734375, "max_memory_usage": 5062.19140625}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"305879": {"average_memory_usage": 4906.263237847223, "min_memory_usage": 3035.0078125, "max_memory_usage": 5061.53515625}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"305879": {"average_memory_usage": 4927.868381076389, "min_memory_usage": 3041.67578125, "max_memory_usage": 5081.6640625}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 1}
+{"305879": {"average_memory_usage": 5908.0560267857145, "min_memory_usage": 3034.9765625, "max_memory_usage": 6157.01953125}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 2}
+{"305879": {"average_memory_usage": 5885.670200892857, "min_memory_usage": 3034.5, "max_memory_usage": 6129.046875}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"305879": {"average_memory_usage": 5886.279526654412, "min_memory_usage": 3049.46484375, "max_memory_usage": 6132.1171875}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"305879": {"average_memory_usage": 7756.066636029412, "min_memory_usage": 3035.6640625, "max_memory_usage": 8285.54296875}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 1}
+{"305879": {"average_memory_usage": 7627.449869791667, "min_memory_usage": 3031.7734375, "max_memory_usage": 8233.75390625}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 2}
+{"305879": {"average_memory_usage": 7754.386610243056, "min_memory_usage": 3032.53515625, "max_memory_usage": 8222.19921875}}

@@ -1,0 +1,81 @@
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 4}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 8}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 4}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 4, "prefetch": 8}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 4}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 16, "prefetch": 8}
+{"nodes": 2, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 4, "ntasks": 4, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 4}
+{"nodes": 2, "gpus": 4, "ntasks": 4, "batch_size": 4, "prefetch": 8}
+{"nodes": 2, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 4}
+{"nodes": 2, "gpus": 4, "ntasks": 4, "batch_size": 16, "prefetch": 8}
+{"nodes": 2, "gpus": 8, "ntasks": 8, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 8, "ntasks": 8, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 4}
+{"308047": {"average_memory_usage": 7268.9675, "min_memory_usage": 5382.88671875, "max_memory_usage": 7522.13671875}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 1, "prefetch": 8}
+{"308047": {"average_memory_usage": 7878.590657552083, "min_memory_usage": 5548.875, "max_memory_usage": 8070.86328125}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 4}
+{"308047": {"average_memory_usage": 7791.925455729167, "min_memory_usage": 5554.8671875, "max_memory_usage": 7968.1640625}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 4, "prefetch": 8}
+{"308047": {"average_memory_usage": 8759.096516927084, "min_memory_usage": 5415.7421875, "max_memory_usage": 8976.11328125}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 4}
+{"308047": {"average_memory_usage": 10686.04484375, "min_memory_usage": 5417.83203125, "max_memory_usage": 11075.6484375}}
+{"nodes": 2, "gpus": 1, "ntasks": 1, "batch_size": 16, "prefetch": 8}
+{"308047": {"average_memory_usage": 14359.998046875, "min_memory_usage": 5434.44140625, "max_memory_usage": 15424.08984375}}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 4}
+{"nodes": 2, "gpus": 2, "ntasks": 2, "batch_size": 1, "prefetch": 8}
+{"308047": {"average_memory_usage": 16343.451089348591, "min_memory_usage": 11708.390625, "max_memory_usage": 16761.59375}}
+{"308047": {"average_memory_usage": 16278.755642361111, "min_memory_usage": 11704.828125, "max_memory_usage": 16679.82421875}}
+{"320737": {"average_memory_usage": 6792.2896412037035, "min_memory_usage": 2223.60546875, "max_memory_usage": 7132.52734375}}
+{"320737": {"average_memory_usage": 6781.434525516055, "min_memory_usage": 2211.04296875, "max_memory_usage": 7124.43359375}}
+{"320737": {"average_memory_usage": 6772.137601902174, "min_memory_usage": 2202.74609375, "max_memory_usage": 7100.91796875}}
+{"320737": {"average_memory_usage": 6991.196650752315, "min_memory_usage": 2183.078125, "max_memory_usage": 7400.55078125}}
+{"321475": {"average_memory_usage": 6939.021821120689, "min_memory_usage": 2826.1015625, "max_memory_usage": 7260.6796875}}
+{"323241": {"average_memory_usage": 7609.625596788194, "min_memory_usage": 5024.48828125, "max_memory_usage": 10194.22265625}}
+{"323241": {"average_memory_usage": 7424.869989809783, "min_memory_usage": 5011.98046875, "max_memory_usage": 10124.9921875}}
+{"324525": {"average_memory_usage": 102508.99686219262, "min_memory_usage": 100077.6328125, "max_memory_usage": 104782.05078125}}
+{"324974": {"average_memory_usage": 28869.879194630874, "min_memory_usage": 26738.64453125, "max_memory_usage": 30780.83984375}}
+{"325123": {"average_memory_usage": 689778.2135416666, "min_memory_usage": 687603.390625, "max_memory_usage": 691154.13671875}}
+{"325246": {"average_memory_usage": 689389.5180664062, "min_memory_usage": 688766.33984375, "max_memory_usage": 690129.83203125}}
+{"325971": {"average_memory_usage": 176187.048125, "min_memory_usage": 174670.84375, "max_memory_usage": 177234.7578125}}
+{"325971": {"average_memory_usage": 176125.505859375, "min_memory_usage": 174544.37890625, "max_memory_usage": 177038.14453125}}
+{"325971": {"average_memory_usage": 178663.78079044117, "min_memory_usage": 177179.85546875, "max_memory_usage": 179843.84375}}
+{"325971": {"average_memory_usage": 174927.93428308822, "min_memory_usage": 116457.0703125, "max_memory_usage": 179473.76953125}}
+{"325971": {"average_memory_usage": 178563.65762867648, "min_memory_usage": 177057.48046875, "max_memory_usage": 179665.1484375}}
+{"325971": {"average_memory_usage": 178668.3731617647, "min_memory_usage": 177098.0390625, "max_memory_usage": 179802.67578125}}
+{"326150": {"average_memory_usage": 205064.8829752604, "min_memory_usage": 201826.34375, "max_memory_usage": 209846.88671875}}
+{"326399": {"average_memory_usage": 288892.0065104167, "min_memory_usage": 287346.54296875, "max_memory_usage": 289683.1796875}}
+{"326399": {"average_memory_usage": 288761.7064996302, "min_memory_usage": 163885.68359375, "max_memory_usage": 290826.86328125}}
+{"326620": {"average_memory_usage": 102152.77869152046, "min_memory_usage": 100142.57421875, "max_memory_usage": 103229.51171875}}
+{"326720": {"average_memory_usage": 121317.78707735655, "min_memory_usage": 115738.484375, "max_memory_usage": 124490.20703125}}
+{"326883": {"average_memory_usage": 121336.76304183468, "min_memory_usage": 55677.0, "max_memory_usage": 125235.65234375}}
+{"326986": {"average_memory_usage": 145249.00165719696, "min_memory_usage": 128513.60546875, "max_memory_usage": 148077.09765625}}
+{"327169": {"average_memory_usage": 139908.45052083334, "min_memory_usage": 138077.42578125, "max_memory_usage": 142504.22265625}}
+{"327559": {"average_memory_usage": 30335.87705965909, "min_memory_usage": 6625.75, "max_memory_usage": 66584.48046875}}
+{"327624": {"average_memory_usage": 222615.06180037314, "min_memory_usage": 219479.6171875, "max_memory_usage": 226203.66796875}}
+{"327624": {"average_memory_usage": 222542.81618923612, "min_memory_usage": 219259.6953125, "max_memory_usage": 225673.88671875}}
+{"327624": {"average_memory_usage": 222346.52677556817, "min_memory_usage": 219440.9296875, "max_memory_usage": 225775.25390625}}
+{"327624": {"average_memory_usage": 220231.8401092233, "min_memory_usage": 153583.61328125, "max_memory_usage": 223768.6796875}}
+{"327624": {"average_memory_usage": 221174.24127730582, "min_memory_usage": 218841.0390625, "max_memory_usage": 224312.0}}
+{"327624": {"average_memory_usage": 221314.56280940594, "min_memory_usage": 217359.859375, "max_memory_usage": 224102.9921875}}
+{"327624": {"average_memory_usage": 220104.18932070976, "min_memory_usage": 152470.78125, "max_memory_usage": 224245.69140625}}
+{"327624": {"average_memory_usage": 119711.2622575431, "min_memory_usage": 116995.26171875, "max_memory_usage": 122221.68359375}}
+{"327624": {"average_memory_usage": 249902.4347747093, "min_memory_usage": 247128.375, "max_memory_usage": 251803.33984375}}
+{"327624": {"average_memory_usage": 120328.6953125, "min_memory_usage": 117755.35546875, "max_memory_usage": 122880.34375}}
+{"327624": {"average_memory_usage": 862592.1140202703, "min_memory_usage": 682421.39453125, "max_memory_usage": 874070.09375}}
+{"327924": {"average_memory_usage": 235047.47487377183, "min_memory_usage": 41950.7265625, "max_memory_usage": 236757.7421875}}
+{"327924": {"average_memory_usage": 34650.32427055703, "min_memory_usage": 8352.37109375, "max_memory_usage": 73054.96484375}}
+{"327924": {"average_memory_usage": 65828.22795826597, "min_memory_usage": 58329.515625, "max_memory_usage": 74087.3359375}}
