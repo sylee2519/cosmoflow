@@ -121,6 +121,28 @@ class KillProcessesCallback(tf.keras.callbacks.Callback):
             print(f"Killed epochs so far: {self.killed_epochs}")
             print(f"Remaining epochs to kill: {self.epochs_to_kill}")
 
+class TimeLogCallback(tf.keras.callbacks.Callback):
+    def __init__(self):
+        super(TimeLogCallback, self).__init__()
+        self.epoch_number = 0
+        self.epoch_start = 0
+        self.epoch_end = 0
+        self.batch_start = 0
+        self.batch_end = 0
+
+    def on_epoch_begin(self, epoch, logs=None):
+        self.epoch_number = epoch
+        self.epoch_start = time.time()
+    def on_epoch_end(self, epoch, logs=None):
+        self.epoch_end = time.time()
+        print(f"[None][None][None][None][None][None][{epoch}][None][{self.epoch_end - self.epoch_start}]") 
+    
+    def on_batch_begin(self, batch, logs=None):
+        self.batch_start = time.time()
+
+    def on_batch_end(self, batch, logs=None):
+        self.batch_end = time.time()
+        print(f"[None][None][None][None][None][None][{self.epoch_number}][{batch}][{self.batch_end - self.batch_start}]")
 
 
 def append_to_json_file(data, filename='/scratch/s5104a21/cosmoflow/hpc/cosmoflow/training_configurations.json'):
@@ -483,7 +505,8 @@ def main():
         hvd.elastic.CommitStateCallback(state),
         hvd.elastic.UpdateBatchStateCallback(state),
         hvd.elastic.UpdateEpochStateCallback(state),
-		KillProcessesCallback(epochs_to_kill=args.epochs_to_kill, kill_times=args.kill_times, nodes=nodes, initial_epochs=initial_epochs) # sy: add
+		KillProcessesCallback(epochs_to_kill=args.epochs_to_kill, kill_times=args.kill_times, nodes=nodes, initial_epochs=initial_epochs), # sy: add
+        TimeLogCallback() # yc: add
     ]
 
 #    if args.distributed:
@@ -539,6 +562,7 @@ def main():
 #        monitor_thread.start()
 
     ###################### Modified code for Elastic Keras
+    train_start_time = time.time()
     @hvd.elastic.run 
     def train(state): 
         model.fit(datasets['train_dataset'],
@@ -550,6 +574,7 @@ def main():
             initial_epoch=initial_epochs[0],
             verbose=fit_verbose)
     train(state)
+    train_end_time = time.time()
 
     # model.fit(datasets['train_dataset'],
     #           steps_per_epoch=datasets['n_train_steps'],
@@ -563,6 +588,7 @@ def main():
 
     if dist.rank == 0:
         training_completed = True
+        # print(f"[None][None][None][None][None][None][None][None][{train_end_time - train_start_time}")
 #        monitor_thread.join()
     # Stop MLPerf timer
     if dist.rank == 0 and args.mlperf:
