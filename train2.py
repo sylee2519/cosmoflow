@@ -79,7 +79,7 @@ from tensorflow.core.protobuf import rewriter_config_pb2
 
 # sy: add - code to kill the processes
 class KillProcessesCallback(tf.keras.callbacks.Callback):
-    def __init__(self, epochs_to_kill, kill_times, nodes):
+    def __init__(self, epochs_to_kill, kill_times, nodes, initial_epochs):
         super(KillProcessesCallback, self).__init__()
         self.epochs_to_kill = set(epochs_to_kill)  # Store as a set for fast membership testing
         self.kill_times = kill_times
@@ -88,7 +88,8 @@ class KillProcessesCallback(tf.keras.callbacks.Callback):
         self.epoch_to_kill = None
         self.batch_to_kill = None
         self.killed_epochs = set()  # To keep track of epochs already killed
-
+        self.initial_epochs = initial_epochs
+		
     def on_epoch_begin(self, epoch, logs=None):
         if hvd.rank() == 0:
             if epoch in self.epochs_to_kill and epoch not in self.killed_epochs:  # Ensure only rank 0 executes this
@@ -114,6 +115,7 @@ class KillProcessesCallback(tf.keras.callbacks.Callback):
                 print(f"Batch {batch} reached in epoch {self.epoch_to_kill}, but no killing is needed.")
 
     def on_epoch_end(self, epoch, logs=None):
+        self.initial_epochs[0] = epoch
         if hvd.rank() == 0:
             print(f"Epoch {epoch} ended. Kills done: {self.kills_done}/{self.kill_times}.")
             print(f"Killed epochs so far: {self.killed_epochs}")
@@ -202,9 +204,9 @@ def parse_args():
             help='Use GPU based on local rank')
     add_arg('--resume', action='store_true',
             help='Resume from last checkpoint')
-    add_arg('--intra-threads', type=int, default=32,
+    add_arg('--intra-threads', type=int, default=1, #32
             help='TF intra-parallel threads')
-    add_arg('--inter-threads', type=int, default=2,
+    add_arg('--inter-threads', type=int, default=1,
             help='TF inter-parallel threads')
     add_arg('--kmp-blocktime', help='Set KMP_BLOCKTIME')
     add_arg('--kmp-affinity', help='Set KMP_AFFINITY')
@@ -326,16 +328,6 @@ def print_training_summary(output_dir, print_fom):
         file.write("\n")
 
 
-def my_parse():
-    parser = argparse.ArgumentParser(description='Train a model on specified GPU settings.')
-    parser.add_argument('—gpus', type=int, default=1, help='Number of GPUs per task.')
-    parser.add_argument('—nodes', type=int, default=1, help='Number of nodes.')
-    parser.add_argument('—ntasks', type=int, default=1, help='Number of tasks.')
-    parser.add_argument('—cpus', type=int, default=1, help='Number of CPUs per task.')
-    parser.add_argument('—batch_size', type=int, default=4, help='Batch size for training.')
-    args = parser.parse_args()
-    return args
-
 def check_gpus(gpus):
 #    gpus = tf.config.experimental.list_physical_devices('GPU')
     if not gpus:
@@ -439,11 +431,12 @@ def main():
     if dist.rank == 0:
         logging.info('Building the model')
     train_config = config['train']
-    initial_epoch = 0
+#    initial_epoch = 0
+    initial_epochs = [0]
     checkpoint_format = os.path.join(config['output_dir'], 'checkpoint-{epoch:03d}.h5')
     if args.resume and os.path.exists(checkpoint_format.format(epoch=1)):
         # Reload model from last checkpoint
-        initial_epoch, model = reload_last_checkpoint(
+        initial_epochs[0], model = reload_last_checkpoint(
             checkpoint_format, data_config['n_epochs'],
             distributed=args.distributed)
     else:
@@ -463,9 +456,8 @@ def main():
     def on_state_reset(): 
         tf.keras.backend.set_value(model.optimizer.lr, model.optimizer.lr * hvd.size())
 
-    state = hvd.elastic.KerasState(model, batch=global_batch_size, epoch=initial_epoch)
+    state = hvd.elastic.KerasState(model, batch=global_batch_size, epoch=initial_epochs[0])
     state.register_reset_callbacks([on_state_reset])
-
 
 
     if dist.rank == 0:
@@ -481,24 +473,23 @@ def main():
         logging.info('Preparing callbacks')
     
 	# sy: add - List of nodes
-    nodes = ["gpu26", "gpu29"]
- 
+    nodes = ["gpu33", "gpu38"]
     ####################### Modified codes for Elastic Keras
     # callbacks = []
     callbacks = [
+        hvd.callbacks.BroadcastGlobalVariablesCallback(0),
+        hvd.callbacks.MetricAverageCallback(),
         hvd.elastic.CommitStateCallback(state),
         hvd.elastic.UpdateBatchStateCallback(state),
         hvd.elastic.UpdateEpochStateCallback(state),
-		KillProcessesCallback(epochs_to_kill=args.epochs_to_kill, kill_times=args.kill_times, nodes=nodes) # sy: add
+		KillProcessesCallback(epochs_to_kill=args.epochs_to_kill, kill_times=args.kill_times, nodes=nodes, initial_epochs=initial_epochs) # sy: add
     ]
 
-    if args.distributed:
-
+#    if args.distributed:
         # Broadcast initial variable states from rank 0 to all processes.
-        callbacks.append(hvd.callbacks.BroadcastGlobalVariablesCallback(0))
-
+#        callbacks.append(hvd.callbacks.BroadcastGlobalVariablesCallback(0))
         # Average metrics across workers
-        callbacks.append(hvd.callbacks.MetricAverageCallback())
+#        callbacks.append(hvd.callbacks.MetricAverageCallback())
 
     # Learning rate decay schedule
     if 'lr_schedule' in config:
@@ -555,7 +546,7 @@ def main():
             validation_data=datasets['valid_dataset'],
             validation_steps=datasets['n_valid_steps'],
             callbacks=callbacks,
-            initial_epoch=initial_epoch,
+            initial_epoch=initial_epochs[0],
             verbose=fit_verbose)
     train(state)
 
