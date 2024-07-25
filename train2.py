@@ -364,6 +364,7 @@ def main():
             print(e)
 	
     check_gpus(gpus)
+    os.environ['HOROVOD_RANK'] = str(hvd.rank())
     global_batch_size = args.batch_size * hvd.size() # sy add
     os.makedirs(config['output_dir'], exist_ok=True)
     config_logging(verbose=args.verbose)
