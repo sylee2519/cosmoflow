@@ -1,4 +1,4 @@
-output_dir: results/cosmo-002
+output_dir: /etmp/results
 
 mlperf:
     org: LBNL
@@ -10,11 +10,11 @@ data:
     name: cosmo
     data_dir: /scratch/s5104a21/cosmoflow/cosmo/cosmoUniverse_2019_05_4parE_tf_v2
     compression: GZIP
-    n_train: 642 #19200 #64 #640 #1280 #524288 #3840
-    n_valid: 642 #6400 #64 #640 #1280 #65536 #1280
+    n_train: 524288 #642 #19200 #64 #640 #1280 #524288 #3840
+    n_valid: 65536 #642 #6400 #64 #640 #1280 #65536 #1280
     sample_shape: [128, 128, 128, 4]
-    batch_size: 4 #4
-    n_epochs: 4 #128
+    batch_size: 16 #4
+    n_epochs: 20 #128
     shard: True
     apply_log: True
     prefetch: 2

@@ -232,9 +232,9 @@ def parse_args():
             help='Use GPU based on local rank')
     add_arg('--resume', action='store_true',
             help='Resume from last checkpoint')
-    add_arg('--intra-threads', type=int, default=32, #32
+    add_arg('--intra-threads', type=int, default=1, #32
             help='TF intra-parallel threads')
-    add_arg('--inter-threads', type=int, default=2,
+    add_arg('--inter-threads', type=int, default=1,
             help='TF inter-parallel threads')
     add_arg('--kmp-blocktime', help='Set KMP_BLOCKTIME')
     add_arg('--kmp-affinity', help='Set KMP_AFFINITY')
@@ -505,7 +505,14 @@ def main():
         logging.info('Preparing callbacks')
     
 	# sy: add - List of nodes
-    nodes = ["gpu33", "gpu38"]
+    hostfile = "hostfile_horovod"
+    nodes = []
+    with open(hostfile, "r") as f:
+        for line in f:
+            node = line.split(":")[0]
+            if node != hostname:
+                nodes.append(node)
+
     ####################### Modified codes for Elastic Keras
     # callbacks = []
     callbacks = [

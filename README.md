@@ -1,60 +1,90 @@
-# CosmoFlow TensorFlow Keras benchmark implementation
+# Fault-tolerant HVAC Performance Testing Experiments
 
-This is a an implementation of the
-[CosmoFlow](https://arxiv.org/abs/1808.04728) 3D convolutional neural network
-for benchmarking. It is written in TensorFlow with the Keras API and uses
-[Horovod](https://github.com/horovod/horovod) for distributed training.
+This document outlines the experimental setup designed to evaluate the performance and fault tolerance of two versions of the HVAC system (ver1 and ver2) using Horovod with Elastic Run on a distributed GPU cluster. The experiments are divided into three main categories: baseline performance without node failure, performance under single node failure at various epochs, and performance under multiple node failures at specific epochs.
 
-You can find the previous TensorFlow implementation which accompanied the CosmoFlow paper at
-https://github.com/NERSC/CosmoFlow
+## Experiment 1: Baseline Performance Without Node Failure
 
-## Datasets
+**Objective:** Measure the baseline performance of the HVAC system (both ver1 and ver2) without any node failures over a fixed number of epochs.
 
-The dataset we use for this benchmark comes from simulations run by the
-ExaLearn group and hosted at NERSC. The following web portal describes the
-technical content of the dataset and provides links to the raw data.
+**Setup:**
+- **Nodes:** 1024
+- **Tasks:** 1024
+- **Epochs:** 20
+- **HVAC Versions:** Original(without HVAC), ver1, and ver2
 
-https://portal.nersc.gov/project/m3363/
+**Procedure:**
 
-For this benchmark we currently use a preprocessed version of the dataset which
-generates crops of size (128, 128, 128, 4) and stores in TFRecord format.
-This preprocessing is done using the [prepare.py](prepare.py) script included
-in this package. We describe here how to get access to this processed dataset,
-but please refer to the ExaLearn web portal for additional technical details.
+0. Generate a hostfile to be used with horovodrun and srun.
 
-Globus is the current recommended way to transfer the dataset locally.
-There is a globus endpoint at:
+### Without HVAC
+1. Run the training script (`train2.py`) with 1024 tasks for 20 epochs using Horovod with Elastic Run and Gloo backend, and log the output.
 
-https://app.globus.org/file-manager?origin_id=31647fba-a006-4322-ad3e-9a4f124db422
+## Ver1 && Ver2
+1. Launch HVAC server (ver1) on 1024 nodes.
 
-The contents are also available via HTTPS at:
+2. Run the training script (`train2.py`) with 1024 tasks for 20 epochs using Horovod with Elastic Run and Gloo backend, and log the output.
 
-https://portal.nersc.gov/project/dasrepo/cosmoflow-benchmark/
+3. Repeat steps 1-2 for HVAC server (ver2).
 
-### MLPerf HPC v1.0 preliminary dataset
+## Experiment 2: Single Node Failure at Various Epochs
 
-Preprocessed TFRecord files are available in a 1.7TB tarball named
-`cosmoUniverse_2019_05_4parE_tf_v2.tar`. It contains subfolders for
-train/val/test file splits.
+**Objective:** Evaluate the performance and recovery of the HVAC system (both ver1 and ver2) under a single node failure at different epochs.
 
-In this preparation, there are 524288 samples for training and 65536 samples for
-validation. The TFRecord files are written with gzip compression to reduce total
-storage size.
+**Setup:**
+- **Nodes:** 1024
+- **Tasks:** 1024
+- **Epochs:** 20
+- **HVAC Versions:** ver1 and ver2
+- **Kill Times:** 1
 
-### MLPerf HPC v0.7 dataset
+**Epochs to Kill:**
+- Epoch 3
+- Epoch 8
+- Epoch 13
+- Epoch 18
 
-The pre-processed dataset in TFRecord format is in the
-`cosmoUniverse_2019_05_4parE_tf` folder, which contains training and validation
-subfolders. There are 262144 samples for training and 65536 samples
-for validation/testing. The combined size of the dataset is 5.1 TB.
+**Procedure:**
 
-For getting started, there is also a small tarball (179MB) with 32 training
-samples and 32 validation samples, called `cosmoUniverse_2019_05_4parE_tf_small.tgz`.
+0. Generate a hostfile to be used with horovodrun and srun.
 
-## Running the benchmark
+1. For each epoch to kill, repeat the following steps.
+    - Version 1
+    - Version 2
 
-Submission scripts are in `scripts`. YAML configuration files go in `configs`.
+## Experiment 3: Multiple Node Failures at Specific Epochs
 
-### Running at NERSC
+**Objective:** Evaluate the performance and recovery of the HVAC system (both ver1 and ver2) under multiple node failures at specific epochs.
 
-`sbatch -N 64 scripts/train_cori.sh`
+**Setup:**
+- **Nodes:** 1024 and 64
+- **Tasks:** 1024 and 64
+- **Epochs:** 20
+- **HVAC Versions:** ver1 and ver2
+
+**Kill Times and Epochs:**
+- 1 Kill at Epoch 8
+- 2 Kills at Epochs 8 and 10
+- 3 Kills at Epochs 8, 10, and 12
+- 4 Kills at Epochs 8, 10, 12, and 14
+- 5 Kills at Epochs 8, 10, 12, 14, and 16
+
+**Procedure:**
+
+0. Generate a hostfile to be used with horovodrun and srun.
+
+1. For each set of kill times and epochs, repeat the following steps:
+    - Version 1 (1024 nodes)
+    - Version 2 (1024 nodes)
+
+2. Repeat the above steps for 64 nodes.
+
+## Requirements
+
+1. In `kill.sh` file, modify this line to your scratch directory:
+    ```sh
+    cd /scratch/s5104a21 # Modify this to your scratch dir
+    ```
+2. Add the following code snippet in the experiment scripts to copy the log directory to a safe location and clear the BB (Burst Buffer):
+    ```sh
+	### COPY LOGDIR INTO THE SAFE PLACE && EMPTY THE BB ###
+    ```
