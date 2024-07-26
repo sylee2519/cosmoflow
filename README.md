@@ -88,3 +88,4 @@ This document outlines the experimental setup designed to evaluate the performan
     ```sh
 	### COPY LOGDIR INTO THE SAFE PLACE && EMPTY THE BB ###
     ```
+3. Ensure that the time is synchronized across all nodes. ('time.time()' and 'gettimeofday()' are used for logging and timing)
