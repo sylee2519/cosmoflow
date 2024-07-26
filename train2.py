@@ -135,14 +135,15 @@ class TimeLogCallback(tf.keras.callbacks.Callback):
         self.epoch_start = time.time()
     def on_epoch_end(self, epoch, logs=None):
         self.epoch_end = time.time()
-        print(f"[None][None][None][None][None][None][{epoch}][None][{self.epoch_end - self.epoch_start}]") 
+        #[string:filepath][string: request][int: flag][int: client rank][int: server rank][string: expn][int: epoch #][int: batch #][gettimeofday: Clocktime]
+        print(f"[None][None][None][None][None][EpochDuration][{epoch}][None][{self.epoch_end - self.epoch_start}]") 
     
     def on_batch_begin(self, batch, logs=None):
         self.batch_start = time.time()
 
     def on_batch_end(self, batch, logs=None):
         self.batch_end = time.time()
-        print(f"[None][None][None][None][None][None][{self.epoch_number}][{batch}][{self.batch_end - self.batch_start}]")
+        print(f"[None][None][None][None][None][BatchDuration][{self.epoch_number}][{batch}][{self.batch_end - self.batch_start}]")
 
 
 def append_to_json_file(data, filename='/scratch/s5104a21/cosmoflow/hpc/cosmoflow/training_configurations.json'):
@@ -588,7 +589,8 @@ def main():
 
     if dist.rank == 0:
         training_completed = True
-        # print(f"[None][None][None][None][None][None][None][None][{train_end_time - train_start_time}")
+        #[string:filepath][string: request][int: flag][int: client rank][int: server rank][string: expn][int: epoch #][int: batch #][gettimeofday: Clocktime]
+        print(f"[None][None][None][None][None][E2E][None][None][{train_end_time - train_start_time}")
 #        monitor_thread.join()
     # Stop MLPerf timer
     if dist.rank == 0 and args.mlperf:
