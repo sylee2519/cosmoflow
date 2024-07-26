@@ -40,6 +40,7 @@ import psutil
 import threading
 import json
 import ctypes
+import socket
 
 # External imports
 import yaml
@@ -96,30 +97,32 @@ class KillProcessesCallback(tf.keras.callbacks.Callback):
                 steps_per_epoch = self.params['steps']
                 self.batch_to_kill = steps_per_epoch // 2  # Kill at the middle of the epoch
                 self.epoch_to_kill = epoch
-                print(f"Epoch {epoch} started. Will kill processes at batch {self.batch_to_kill}.")
-            else:
-                print(f"Epoch {epoch} started. No killing scheduled for this epoch.")
+#                print(f"Epoch {epoch} started. Will kill processes at batch {self.batch_to_kill}.")
+#            else:
+#                print(f"Epoch {epoch} started. No killing scheduled for this epoch.")
 
     def on_batch_begin(self, batch, logs=None):
         if hvd.rank() == 0:
             if self.kills_done < self.kill_times and self.epoch_to_kill in self.epochs_to_kill and batch == self.batch_to_kill:
                 node_to_kill = random.choice(self.nodes)
+                kill_time = time.time()
                 self.nodes.remove(node_to_kill)  # Remove the node from the list after selecting it
-                print(f"Killing processes on node {node_to_kill} at epoch {self.epoch_to_kill}, batch {batch}")
+                print(f"[{node_to_kill}][None][None][None][None][Kill][{self.epoch_to_kill}][{batch}][{kill_time}]")
+#                print(f"Killing processes on node {node_to_kill} at epoch {self.epoch_to_kill}, batch {batch}")
                 subprocess.run(["./kill.sh", node_to_kill], check=True)
                 self.kills_done += 1
                 self.killed_epochs.add(self.epoch_to_kill)  # Ensure we don't kill again in this epoch
                 self.epochs_to_kill.remove(self.epoch_to_kill)  # Ensure we don't kill again in this epoch
                 self.epoch_to_kill = None  # Reset the epoch to kill
-            elif batch == self.batch_to_kill:
-                print(f"Batch {batch} reached in epoch {self.epoch_to_kill}, but no killing is needed.")
+#            elif batch == self.batch_to_kill:
+#                print(f"Batch {batch} reached in epoch {self.epoch_to_kill}, but no killing is needed.")
 
     def on_epoch_end(self, epoch, logs=None):
         self.initial_epochs[0] = epoch
-        if hvd.rank() == 0:
-            print(f"Epoch {epoch} ended. Kills done: {self.kills_done}/{self.kill_times}.")
-            print(f"Killed epochs so far: {self.killed_epochs}")
-            print(f"Remaining epochs to kill: {self.epochs_to_kill}")
+#        if hvd.rank() == 0:
+#            print(f"Epoch {epoch} ended. Kills done: {self.kills_done}/{self.kill_times}.")
+#            print(f"Killed epochs so far: {self.killed_epochs}")
+#            print(f"Remaining epochs to kill: {self.epochs_to_kill}")
 
 class TimeLogCallback(tf.keras.callbacks.Callback):
     def __init__(self):
@@ -390,6 +393,9 @@ def main():
 	
     check_gpus(gpus)
     os.environ['HOROVOD_RANK'] = str(hvd.rank())
+    hostname = socket.gethostname()
+    print(f"[{hostname}][{hvd.rank()}][None][None][None][None][None][None][None]")
+
     global_batch_size = args.batch_size * hvd.size() # sy add
     os.makedirs(config['output_dir'], exist_ok=True)
     config_logging(verbose=args.verbose)
