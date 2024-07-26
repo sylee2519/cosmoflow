@@ -232,9 +232,9 @@ def parse_args():
             help='Use GPU based on local rank')
     add_arg('--resume', action='store_true',
             help='Resume from last checkpoint')
-    add_arg('--intra-threads', type=int, default=1, #32
+    add_arg('--intra-threads', type=int, default=32, #32
             help='TF intra-parallel threads')
-    add_arg('--inter-threads', type=int, default=1,
+    add_arg('--inter-threads', type=int, default=2,
             help='TF inter-parallel threads')
     add_arg('--kmp-blocktime', help='Set KMP_BLOCKTIME')
     add_arg('--kmp-affinity', help='Set KMP_AFFINITY')
