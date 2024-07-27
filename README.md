@@ -17,14 +17,19 @@ This document outlines the experimental setup designed to evaluate the performan
 0. Generate a hostfile to be used with horovodrun and srun.
 
 ### Without HVAC
+
 1. Run the training script (`train2.py`) with 1024 tasks for 20 epochs using Horovod with Elastic Run and Gloo backend, and log the output.
 
 ## Ver1 && Ver2
-1. Launch HVAC server (ver1) on 1024 nodes.
+1. Create the HVAC\_Data\_DIR in BB of each node.
 
-2. Run the training script (`train2.py`) with 1024 tasks for 20 epochs using Horovod with Elastic Run and Gloo backend, and log the output.
+2. Launch HVAC server (ver1) on 1024 nodes.
 
-3. Repeat steps 1-2 for HVAC server (ver2).
+3. Run the training script (`train2.py`) with 1024 tasks for 20 epochs using Horovod with Elastic Run and Gloo backend, and log the output. (ver2)
+
+4. Kill the HVAC\_SERVER
+
+5. Repeat steps 1-4 for ver2..
 
 ## Experiment 2: Single Node Failure at Various Epochs
 
@@ -80,12 +85,8 @@ This document outlines the experimental setup designed to evaluate the performan
 
 ## Requirements
 
-1. In `kill.sh` file, modify this line to your scratch directory:
-    ```sh
-    cd /scratch/s5104a21 # Modify this to your scratch dir
-    ```
-2. Add the following code snippet in the experiment scripts to copy the log directory to a safe location and clear the BB (Burst Buffer):
+1. Add the following code snippet in the experiment scripts to copy the log directory to a safe location and clear the BB (Burst Buffer):
     ```sh
 	### COPY LOGDIR INTO THE SAFE PLACE && EMPTY THE BB ###
     ```
-3. Ensure that the time is synchronized across all nodes. ('time.time()' and 'gettimeofday()' are used for logging and timing)
+2. Ensure that the time is synchronized across all nodes. ('time.time()' and 'gettimeofday()' are used for logging and timing)
