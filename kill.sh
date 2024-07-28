@@ -10,7 +10,7 @@ initial_pwd=$(pwd)
 if [ -n "$NODE" ]; then
   echo "Connecting to node $NODE..."
   ssh $NODE << 'EOF'
-    cd $initial_pwd # Modify this to your scratch dir
+    cd $initial_pwd 
     PATTERNS=("hvac_server" "python" "horovodrun")
 
     for PATTERN in "${PATTERNS[@]}"; do
@@ -26,7 +26,7 @@ EOF
 #  echo "Process killing complete on node $NODE."
 else
 #  echo "No node provided, performing process killing on the local machine..."
-  PATTERNS=("hvac_server" "python" "horovodrun" "srun")
+  PATTERNS=("hvac_server" "python" "horovodrun")
 
   for PATTERN in "${PATTERNS[@]}"; do
     PIDS=$(pgrep -f $PATTERN)

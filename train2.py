@@ -505,11 +505,11 @@ def main():
         logging.info('Preparing callbacks')
     
 	# sy: add - List of nodes
-    hostfile = "hostfile_horovod"
+    hostfile = "hostfile"
     nodes = []
     with open(hostfile, "r") as f:
         for line in f:
-            node = line.split(":")[0]
+            node = line.split()[0]
             if node != hostname:
                 nodes.append(node)
 
