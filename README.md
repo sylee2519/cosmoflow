@@ -20,10 +20,6 @@ This document outlines the experimental setup designed to evaluate the performan
     ```
 3. Ensure that the time is synchronized across all nodes ('time.time()' and 'gettimeofday()' are used for logging and timing).
 
-4. In the `kill.sh` file, modify the following line to match your scratch directory:
-    ```sh
-    cd /scratch/s5104a21 # Modify this to your scratch dir
-    ```
 
 ## Quick Guide
 
