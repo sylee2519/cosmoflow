@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Define the number of node
+# Define the number of node and the HVAC paths
 NumNode=1024
+HVAC_V1_ServerPath="/path/to/hvac_ver1/build/src/bin/hvac_server"
+HVAC_V2_ServerPath="/path/to/hvac_ver2/build/src/bin/hvac_server"
+HVAC_V1_ClientPath="/path/to/hvac_ver1/build/src/libhvac_client.so"
+HVAC_V2_ClientPath="/path/to/hvac_ver2/build/src/libhvac_client.so"
+
 
 ######### Experiment 3: Multiple Kills #########
 export BBPATH="/path/to/bb"
@@ -30,8 +35,8 @@ for kill_config in "${kill_configs[@]}"; do
   MY_JOBID=$(($config_count*1))
   export HVAC_LOG_DIR="${BBPATH}/logdir/expr3/${NumNode}/v1_config${config_count}"
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST mkdir -p ${HVAC_LOG_DIR}
-  srun --export=ALL,HVAC_LOG_DIR=${HVAC_LOG_DIR},HVAC_SERVER_COUNT=${NumNode},MY_JOBID=${MY_JOBID} --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST /path/to/hvac_ver1/build/src/bin/hvac_server ${NumNode} &
-  LD_PRELOAD=/path/to/hvac_ver1/build/src/libhvac_client.so horovodrun --start-timeout 120 --gloo -np ${NumNode} --min-np 1 --hostfile hostfile env HVAC_LOG_DIR=${HVAC_LOG_DIR} HVAC_SERVER_COUNT=${NumNode} MY_JOBID=${MY_JOBID} python train2.py -d --batch-size=16 --prefetch=2 --seed=0 --kill-times $(echo $kill_config | wc -w) --epochs-to-kill $kill_config 2>&1 | tee ${HVAC_LOG_DIR}/output_ver1_kill${config_count}.log
+  srun --export=ALL,HVAC_LOG_DIR=${HVAC_LOG_DIR},HVAC_SERVER_COUNT=${NumNode},MY_JOBID=${MY_JOBID} --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST ${HVAC_V1_ServerPath} ${NumNode} &
+  LD_PRELOAD=${HVAC_V1_ClientPath} horovodrun --start-timeout 120 --gloo -np ${NumNode} --min-np 1 --hostfile ${hostfile} env HVAC_LOG_DIR=${HVAC_LOG_DIR} HVAC_SERVER_COUNT=${NumNode} MY_JOBID=${MY_JOBID} python train2.py -d --batch-size=16 --prefetch=2 --seed=0 --kill-times $(echo $kill_config | wc -w) --epochs-to-kill $kill_config 2>&1 | tee ${HVAC_LOG_DIR}/output_ver1_kill${config_count}.log
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST sh kill.sh # Kill hvac_server && other possible processes
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST cp -r ${BBPATH}/logdir ./ # Copy LOGDIR outof BB
   rm -rf ./.ports*
@@ -41,8 +46,8 @@ for kill_config in "${kill_configs[@]}"; do
   MY_JOBID=$(($config_count*2))
   export HVAC_LOG_DIR="${BBPATH}/logdir/expr3/${NumNode}/v2_config${config_count}"
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST mkdir -p ${HVAC_LOG_DIR}
-  srun --export=ALL,HVAC_LOG_DIR=${HVAC_LOG_DIR},HVAC_SERVER_COUNT=${NumNode},MY_JOBID=${MY_JOBID} --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST /path/to/hvac_ver2/build/src/bin/hvac_server ${NumNode} &
-  LD_PRELOAD=/path/to/hvac_ver2/build/src/libhvac_client.so horovodrun --start-timeout 120 --gloo -np ${NumNode} --min-np 1 --hostfile hostfile env HVAC_LOG_DIR=${HVAC_LOG_DIR} HVAC_SERVER_COUNT=${NumNode} MY_JOBID=${MY_JOBID} python train2.py -d --batch-size=16 --prefetch=2 --seed=0 --kill-times $(echo $kill_config | wc -w) --epochs-to-kill $kill_config 2>&1 | tee ${HVAC_LOG_DIR}/output_ver2_kill${config_count}.log
+  srun --export=ALL,HVAC_LOG_DIR=${HVAC_LOG_DIR},HVAC_SERVER_COUNT=${NumNode},MY_JOBID=${MY_JOBID} --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST ${HVAC_V2_ServerPath} ${NumNode} &
+  LD_PRELOAD=${HVAC_V2_ClientPath} horovodrun --start-timeout 120 --gloo -np ${NumNode} --min-np 1 --hostfile ${hostfile} env HVAC_LOG_DIR=${HVAC_LOG_DIR} HVAC_SERVER_COUNT=${NumNode} MY_JOBID=${MY_JOBID} python train2.py -d --batch-size=16 --prefetch=2 --seed=0 --kill-times $(echo $kill_config | wc -w) --epochs-to-kill $kill_config 2>&1 | tee ${HVAC_LOG_DIR}/output_ver2_kill${config_count}.log
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST sh kill.sh # Kill hvac_server && other possible processes
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST cp -r ${BBPATH}/logdir ./ # Copy LOGDIR outof BB
   rm -rf ./.ports*
@@ -63,8 +68,8 @@ for kill_config in "${kill_configs[@]}"; do
   MY_JOBID=$(($config_count*1))
   export HVAC_LOG_DIR="${BBPATH}/logdir/expr3/${NumNode}/v1_config${config_count}"
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST mkdir -p ${HVAC_LOG_DIR}
-  srun --export=ALL,HVAC_LOG_DIR=${HVAC_LOG_DIR},HVAC_SERVER_COUNT=${NumNode},MY_JOBID=${MY_JOBID} --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST /path/to/hvac_ver1/build/src/bin/hvac_server ${NumNode} &
-  LD_PRELOAD=/path/to/hvac_ver1/build/src/libhvac_client.so horovodrun --start-timeout 120 --gloo -np ${NumNode} --min-np 1 --hostfile hostfile env HVAC_LOG_DIR=${HVAC_LOG_DIR} HVAC_SERVER_COUNT=${NumNode} MY_JOBID=${MY_JOBID} python train2.py -d --batch-size=16 --prefetch=2 --seed=0 --kill-times $(echo $kill_config | wc -w) --epochs-to-kill $kill_config 2>&1 | tee ${HVAC_LOG_DIR}/output_ver1_kill${config_count}.log
+  srun --export=ALL,HVAC_LOG_DIR=${HVAC_LOG_DIR},HVAC_SERVER_COUNT=${NumNode},MY_JOBID=${MY_JOBID} --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST ${HVAC_V1_ServerPath} ${NumNode} &
+  LD_PRELOAD=${HVAC_V1_ClientPath} horovodrun --start-timeout 120 --gloo -np ${NumNode} --min-np 1 --hostfile ${hostfile} env HVAC_LOG_DIR=${HVAC_LOG_DIR} HVAC_SERVER_COUNT=${NumNode} MY_JOBID=${MY_JOBID} python train2.py -d --batch-size=16 --prefetch=2 --seed=0 --kill-times $(echo $kill_config | wc -w) --epochs-to-kill $kill_config 2>&1 | tee ${HVAC_LOG_DIR}/output_ver1_kill${config_count}.log
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST sh kill.sh # Kill hvac_server && other possible processes
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST cp -r ${BBPATH}/logdir ./ # Copy LOGDIR outof BB
   rm -rf ./.ports*
@@ -74,8 +79,8 @@ for kill_config in "${kill_configs[@]}"; do
   MY_JOBID=$(($config_count*2))
   export HVAC_LOG_DIR="${BBPATH}/logdir/expr3/${NumNode}/v2_config${config_count}"
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST mkdir -p ${HVAC_LOG_DIR}
-  srun --export=ALL,HVAC_LOG_DIR=${HVAC_LOG_DIR},HVAC_SERVER_COUNT=${NumNode},MY_JOBID=${MY_JOBID} --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST /path/to/hvac_ver2/build/src/bin/hvac_server ${NumNode} &
-  LD_PRELOAD=/path/to/hvac_ver2/build/src/libhvac_client.so horovodrun --start-timeout 120 --gloo -np ${NumNode} --min-np 1 --hostfile hostfile env HVAC_LOG_DIR=${HVAC_LOG_DIR} HVAC_SERVER_COUNT=${NumNode} MY_JOBID=${MY_JOBID} python train2.py -d --batch-size=16 --prefetch=2 --seed=0 --kill-times $(echo $kill_config | wc -w) --epochs-to-kill $kill_config 2>&1 | tee ${HVAC_LOG_DIR}/output_ver2_kill${config_count}.log
+  srun --export=ALL,HVAC_LOG_DIR=${HVAC_LOG_DIR},HVAC_SERVER_COUNT=${NumNode},MY_JOBID=${MY_JOBID} --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST ${HVAC_V2_ServerPath} ${NumNode} &
+  LD_PRELOAD=${HVAC_V2_ClientPath} horovodrun --start-timeout 120 --gloo -np ${NumNode} --min-np 1 --hostfile ${hostfile} env HVAC_LOG_DIR=${HVAC_LOG_DIR} HVAC_SERVER_COUNT=${NumNode} MY_JOBID=${MY_JOBID} python train2.py -d --batch-size=16 --prefetch=2 --seed=0 --kill-times $(echo $kill_config | wc -w) --epochs-to-kill $kill_config 2>&1 | tee ${HVAC_LOG_DIR}/output_ver2_kill${config_count}.log
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST sh kill.sh # Kill hvac_server && other possible processes
   srun --nodes=${NumNode} --ntasks=${NumNode} --gres=gpu:0 --ntasks-per-node=1 --gpus-per-task=0 --nodelist=$NODELIST cp -r ${BBPATH}/logdir ./ # Copy LOGDIR outof BB
   rm -rf ./.ports*
