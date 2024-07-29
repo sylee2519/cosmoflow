@@ -11,6 +11,8 @@ This document outlines the experimental setup designed to evaluate the performan
 - **expr1.sh**
 - **expr2.sh**
 - **expr3.sh**
+- **HVAC_f `Ver1 branch` HVAC Server and Client**
+- **HVAC_f `Ver2 branch` HVAC Server and Client**
 
 1. Horovod should be installed with Gloo support.
 
