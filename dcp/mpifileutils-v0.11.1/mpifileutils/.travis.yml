@@ -1,0 +1,65 @@
+sudo: required
+dist: xenial
+
+language: c
+
+# - sudo apt-get install -qq check mpich check bc libattr1-dev python-pip
+before_install:
+ - test -n $CC  && unset CC
+ - test -n $CXX && unset CXX
+ - sudo apt-get update -qq
+ - sudo apt-cache search mpich
+ - sudo apt-get install -qq check bc libattr1-dev libcap-dev python-pip
+ - sudo pip install nose
+ - wget https://www.mpich.org/static/downloads/3.3/mpich-3.3.tar.gz
+ - tar -zxf mpich-3.3.tar.gz
+ - pushd mpich-3.3
+ - ./configure --enable-fortran=no && make -j4 && sudo make install
+ - popd
+ - libcircle=libcircle-0.3.0
+ - wget https://github.com/hpc/libcircle/releases/download/v0.3/${libcircle}.tar.gz
+ - tar -zxf ${libcircle}.tar.gz
+ - pushd ${libcircle}
+ - ./configure --enable-tests && make && make check && sudo make install
+ - popd
+ - lwgrp=lwgrp-1.0.3
+ - wget https://github.com/llnl/lwgrp/releases/download/v1.0.3/${lwgrp}.tar.gz
+ - tar -zxf ${lwgrp}.tar.gz
+ - pushd ${lwgrp}
+ - ./configure && make && sudo make install
+ - popd
+ - dtcmp=dtcmp-1.1.1
+ - wget https://github.com/llnl/dtcmp/releases/download/v1.1.1/${dtcmp}.tar.gz
+ - tar zxvf ${dtcmp}.tar.gz
+ - pushd ${dtcmp}
+ - ./configure --with-lwgrp=/usr/local && make && sudo make install
+ - popd
+ - libarchive=libarchive-3.5.1
+ - wget https://github.com/libarchive/libarchive/releases/download/3.5.1/${libarchive}.tar.gz
+ - tar zxvf ${libarchive}.tar.gz
+ - pushd ${libarchive}
+ - ./configure && make && sudo make install
+ - popd
+ - sudo ldconfig
+
+before_script:
+ - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git show --summary HEAD | grep -q "Signed-off-by:"; fi'
+
+script:
+ - mkdir build install && cd build
+ - cmake ../ -DCMAKE_INSTALL_PREFIX=../install -DENABLE_EXPERIMENTAL=ON
+ - make
+ - make test
+ - make install
+
+#script: ./autogen.sh && export CC=mpicc && ./configure && make && make test
+#script: ./autogen.sh && ./configure && make && make test
+
+compiler:
+  - clang
+  - gcc
+
+notifications:
+  email: false
+    #- sikich1@llnl.gov
+    #- moody20@llnl.gov

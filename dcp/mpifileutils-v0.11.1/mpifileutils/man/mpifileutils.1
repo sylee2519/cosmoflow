@@ -1,0 +1,693 @@
+.\" Man page generated from reStructuredText.
+.
+.TH "MPIFILEUTILS" "1" "Feb 04, 2022" "0.11.1" "mpiFileUtils"
+.SH NAME
+mpifileutils \- mpiFileUtils Documentation
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.SH OVERVIEW
+.sp
+High\-performance computing users generate large datasets using parallel applications that can run with thousands of processes.
+However, users are often stuck managing those datasets using traditional single\-process tools like cp and rm.
+This mismatch in scale makes it impractical for users to work with their data.
+.sp
+The mpiFileUtils suite solves this problem by offering MPI\-based tools for basic tasks like copy, remove, and compare for such datasets,
+delivering orders of magnitude in performance speedup over their single\-process counterparts.
+Furthermore, the libmfu library packages common functionality to simplify the creation of new tools,
+and it can even be invoked directly from within HPC applications.
+.sp
+Video Overview: \fI\%“Scalable Management of HPC Datasets with mpiFileUtils”\fP, HPCKP‘20.
+.sp
+The figure below, taken from the above presentation, illustrates the potential performance improvement that one can achieve
+when scaling a tool like dcp to utilize more compute resources.
+.INDENT 0.0
+.INDENT 2.5
+[image]
+dcp scaling performance on the Sierra cluster at LLNL using 40 processes/node.  Shows the time required to copy a single directory of 200k files totaling 24.4 TiB of data.  The minimum time of 93 seconds at 64 nodes is 495x faster than the 12.75 hours taken by the cp command..UNINDENT
+.UNINDENT
+.SH USER GUIDE
+.SS Build
+.sp
+mpiFileUtils and its dependencies can be installed with CMake or Spack.
+Several build variations are described in this section:
+.INDENT 0.0
+.IP \(bu 2
+CMake
+.IP \(bu 2
+Spack
+.IP \(bu 2
+development build with CMake
+.IP \(bu 2
+development build with Spack
+.UNINDENT
+.SS CMake
+.sp
+mpiFileUtils requires CMake 3.1 or higher.
+Before running cmake, ensure that the MPI wrapper scripts like mpicc are loaded in your environment.
+.sp
+The simplest mpiFileUtils install for many users is to build from a release package.
+This packages the source for a specific version of mpiFileUtils along with the corresponding source for several of its dependencies in a single tarball.
+mpiFileUtils release packages are available as attachments from their respective GitHub Releases page:
+.sp
+\fI\%https://github.com/hpc/mpifileutils/releases\fP
+.sp
+mpiFileUtils optionally depends on libarchive, version 3.5.1.
+If new enough, the system install of libarchive may be sufficient,
+though even newer versions may be incompatible with the required version.
+To be certain of compatibility, it is recommended that one install libarchive\-3.5.1 with commands like the following
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#!/bin/bash
+mkdir install
+installdir=\(gapwd\(ga/install
+
+wget https://github.com/libarchive/libarchive/releases/download/3.5.1/libarchive\-3.5.1.tar.gz
+tar \-zxf libarchive\-3.5.1.tar.gz
+cd libarchive\-3.5.1
+  ./configure \-\-prefix=$installdir
+  make install
+cd ..
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+To build on PowerPC, one may need to add \fB\-\-build=powerpc64le\-redhat\-linux\-gnu\fP to the configure command.
+.sp
+Assuming libarchive has been installed to an \fIinstall\fP directory as shown above,
+one can then build mpiFileUtils from a release like v0.11.1 with commands like the following:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+wget https://github.com/hpc/mpifileutils/releases/download/v0.11.1/mpifileutils\-v0.11.1.tgz
+tar \-zxf mpifileutils\-v0.11.1.tgz
+cd mpifileutils\-v0.11.1
+  mkdir build
+  cd build
+    cmake .. \e
+      \-DWITH_LibArchive_PREFIX=../../install \e
+      \-DCMAKE_INSTALL_PREFIX=../../install
+    make \-j install
+  cd ..
+cd ..
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Additional CMake options:
+.INDENT 0.0
+.IP \(bu 2
+\fB\-DENABLE_LIBARCHIVE=[ON/OFF]\fP : use libarchive and build tools requiring libarchive like dtar, defaults to \fBON\fP
+.IP \(bu 2
+\fB\-DENABLE_XATTRS=[ON/OFF]\fP : use extended attributes and libattr, defaults to \fBON\fP
+.IP \(bu 2
+\fB\-DENABLE_LUSTRE=[ON/OFF]\fP : specialization for Lustre, defaults to \fBOFF\fP
+.IP \(bu 2
+\fB\-DENABLE_GPFS=[ON/OFF]\fP : specialization for GPFS, defaults to \fBOFF\fP
+.IP \(bu 2
+\fB\-DENABLE_EXPERIMENTAL=[ON/OFF]\fP : build experimental tools, defaults to \fBOFF\fP
+.UNINDENT
+.SS DAOS support
+.sp
+To build with DAOS support, first install mpiFileUtils dependencies as mentioned above,
+and also make sure DAOS is installed. If DAOS is installed under a standard
+system path then specifying the DAOS path with \fB\-DWITH_DAOS_PREFIX\fP is unnecessary.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+cmake ../mpifileutils \e
+  \-DCMAKE_INSTALL_PREFIX=../install \e
+  \-DWITH_DAOS_PREFIX=</path/to/daos/> \e
+  \-DENABLE_DAOS=ON
+make \-j install
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Some DAOS\-enabled tools require HDF5.
+To use the \fIdaos\-serialize\fP and \fIdaos\-deserialize\fP tools, HDF5 1.2+ is required.
+To copy HDF5 containers with \fIdcp\fP, HDF5 1.8+ is required, along with the daos\-vol.
+.sp
+To build with HDF5 support, add the following flags during CMake.
+If HDF5 is installed under a standard system path then specifying the HDF5 path with \fB\-DWITH_HDF5_PREFIX\fP is unnecessary.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-DENABLE_HDF5=ON \e
+\-DWITH_HDF5_PREFIX=</path/to/hdf5>
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Spack
+.sp
+To use \fI\%Spack\fP, it is recommended that one first create a \fIpackages.yaml\fP file to list system\-provided packages, like MPI.
+Without doing this, Spack will fetch and install an MPI library that may not work on your system.
+Make sure that you’ve set up spack in your shell (see \fI\%these instructions\fP).
+.sp
+Once Spack has been configured, mpiFileUtils can be installed as:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+spack install mpifileutils
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+or to enable all features:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+spack install mpifileutils +lustre +gpfs +experimental
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Development build with CMake
+.sp
+To make changes to mpiFileUtils, one may wish to build from a clone of the repository.
+This requires that one installs the mpiFileUtils dependencies separately,
+which can be done with the following commands:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#!/bin/bash
+mkdir install
+installdir=\(gapwd\(ga/install
+
+mkdir deps
+cd deps
+  wget https://github.com/hpc/libcircle/releases/download/v0.3/libcircle\-0.3.0.tar.gz
+  wget https://github.com/llnl/lwgrp/releases/download/v1.0.4/lwgrp\-1.0.4.tar.gz
+  wget https://github.com/llnl/dtcmp/releases/download/v1.1.4/dtcmp\-1.1.4.tar.gz
+  wget https://github.com/libarchive/libarchive/releases/download/3.5.1/libarchive\-3.5.1.tar.gz
+
+  tar \-zxf libcircle\-0.3.0.tar.gz
+  cd libcircle\-0.3.0
+    ./configure \-\-prefix=$installdir
+    make install
+  cd ..
+
+  tar \-zxf lwgrp\-1.0.4.tar.gz
+  cd lwgrp\-1.0.4
+    ./configure \-\-prefix=$installdir
+    make install
+  cd ..
+
+  tar \-zxf dtcmp\-1.1.4.tar.gz
+  cd dtcmp\-1.1.4
+    ./configure \-\-prefix=$installdir \-\-with\-lwgrp=$installdir
+    make install
+  cd ..
+
+  tar \-zxf libarchive\-3.5.1.tar.gz
+  cd libarchive\-3.5.1
+    ./configure \-\-prefix=$installdir
+    make install
+  cd ..
+cd ..
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+One can then clone, build, and install mpiFileUtils:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+git clone https://github.com/hpc/mpifileutils
+mkdir build
+cd build
+cmake ../mpifileutils \e
+  \-DWITH_DTCMP_PREFIX=../install \e
+  \-DWITH_LibCircle_PREFIX=../install \e
+  \-DWITH_LibArchive_PREFIX=../install \e
+  \-DCMAKE_INSTALL_PREFIX=../install
+make \-j install
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The same CMake options as described in earlier sections are available.
+.SS Development build with Spack
+.sp
+One can also build from a clone of the mpiFileUtils repository
+after using Spack to install its dependencies via the \fIspack.yaml\fP file that is distributed with mpiFileUtils.
+From the root directory of mpiFileUtils, run the command \fIspack find\fP to determine which packages Spack will install.
+Next, run \fIspack concretize\fP to have Spack perform dependency analysis.
+Finally, run \fIspack install\fP to build the dependencies.
+.sp
+There are two ways to tell CMake about the dependencies.
+First, you can use \fIspack load [depname]\fP to put the installed dependency into your environment paths.
+Then, at configure time, CMake will automatically detect the location of these dependencies.
+Thus, the commands to build become:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+git clone https://github.com/hpc/mpifileutils
+mkdir build install
+cd mpifileutils
+spack install
+spack load dtcmp
+spack load libcircle
+spack load libarchive
+cd ../build
+cmake ../mpifileutils
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The other way to use spack is to create a “view” to the installed dependencies.
+Details on this are coming soon.
+.SS Project Design Principles
+.sp
+The following principles drive design decisions in the project.
+.SS Scale
+.sp
+The library and tools should be designed such that running with more processes
+increases performance, provided there are sufficient data and parallelism
+available in the underlying file systems. The design of the tool should not
+impose performance scalability bottlenecks.
+.SS Performance
+.sp
+While it is tempting to mimic the interface, behavior, and file formats of
+familiar tools like cp, rm, and tar, when forced with a choice between
+compatibility and performance, mpiFileUtils chooses performance. For example,
+if an archive file format requires serialization that inhibits parallel
+performance, mpiFileUtils will opt to define a new file format that enables
+parallelism rather than being constrained to existing formats. Similarly,
+options in the tool command line interface may have different semantics from
+familiar tools in cases where performance is improved. Thus, one should be
+careful to learn the options of each tool.
+.SS Portability
+.sp
+The tools are intended to support common file systems used in HPC centers, like
+Lustre, GPFS, and NFS. Additionally, methods in the library should be portable
+and efficient across multiple file systems. Tool and library users can rely on
+mpiFileUtils to provide portable and performant implementations.
+.SS Composability
+.sp
+While the tools do not support chaining with Unix pipes, they do support
+interoperability through input and output files. One tool may process a dataset
+and generate an output file that another tool can read as input, e.g., to walk
+a directory tree with one tool, filter the list of file names with another, and
+perhaps delete a subset of matching files with a third. Additionally, when logic
+is deemed to be useful across multiple tools or is anticipated to be useful in
+future tools or applications, it should be provided in the common library.
+.SS Utilities
+.sp
+The tools in mpiFileUtils are MPI applications. They must be launched
+as MPI applications, e.g., within a compute allocation on a cluster using
+mpirun. The tools do not currently checkpoint, so one must be careful that an
+invocation of the tool has sufficient time to complete before it is killed.
+.INDENT 0.0
+.IP \(bu 2
+dbcast \- Broadcast a file to each compute node.
+.IP \(bu 2
+dbz2 \- Compress and decompress a file with bz2.
+.IP \(bu 2
+dchmod \- Change owner, group, and permissions on files.
+.IP \(bu 2
+dcmp \- Compare contents between directories or files.
+.IP \(bu 2
+dcp \- Copy files.
+.IP \(bu 2
+ddup \- Find duplicate files.
+.IP \(bu 2
+dfind \- Filter files.
+.IP \(bu 2
+dreln \- Update symlinks to point to a new path.
+.IP \(bu 2
+drm \- Remove files.
+.IP \(bu 2
+dstripe \- Restripe files (Lustre).
+.IP \(bu 2
+dsync \- Synchronize source and destination directories or files.
+.IP \(bu 2
+dtar \- Create and extract tape archive files.
+.IP \(bu 2
+dwalk \- List, sort, and profile files.
+.UNINDENT
+.SS Experimental Utilities
+.sp
+Experimental utilities are under active development. They are not considered to
+be production worthy, but they are available in the distribution for those
+who are interested in developing them further or to provide additional examples.
+.INDENT 0.0
+.IP \(bu 2
+dgrep \- Run grep on files in parallel.
+.IP \(bu 2
+dparallel \- Perform commands in parallel.
+.IP \(bu 2
+dsh \- List and remove files with interactive commands.
+.IP \(bu 2
+dfilemaker \- Generate random files.
+.UNINDENT
+.SS Usage tips
+.sp
+Since the tools are MPI applications, it helps to keep a few things in mind:
+.INDENT 0.0
+.IP \(bu 2
+One typically needs to run the tools within a job allocation.  The sweet spot for most tools is about 2\-4 nodes.  One can use more nodes for large datasets, so long as tools scale sufficiently well.
+.IP \(bu 2
+One must launch the job using the MPI job launcher like mpirun or mpiexec.  One should use most CPU cores, though leave a few cores idle on each node for the file system client processes.
+.IP \(bu 2
+Most tools do not checkpoint their progress.  Be sure to request sufficient time in your allocation to allow the job to complete.  One may need to start over from the beginning if a tool is interrupted.
+.IP \(bu 2
+One cannot pipe output of one tool to the input of another.  However, the –input and –output file options are good approximations.
+.IP \(bu 2
+One cannot easily check the return codes of tools.  Instead, inspect stdout and stderr output for errors.
+.UNINDENT
+.SS Examples and frequently used commands
+.sp
+If your MPI library supports it, most tools can run as MPI singletons (w/o mpirun, which runs a single\-task MPI job).
+For brevity, the examples in this section are shown as MPI singleton runs.
+In a real run, one would precede the command shown with an appropriate MPI launch command and options, e.g.,:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+mpirun \-np 128 dwalk /path/to/walk
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+In addition to the man page, each tool provides a help screen for a brief reminder of available options.:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dwalk \-\-help
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The normal output from dwalk shows a summary of item and byte counts.
+This is useful to determine the number of files and bytes under a path of interest:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dwalk /path/to/walk
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+When walking large directory trees, you can write the list to an output file.
+Then you can read that list back without having to walk the file system again.:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dwalk \-\-output list.mfu /path/to/walk
+dwalk \-\-input list.mfu
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The default file format is a binary file intended for use in other tools, not humans, but one can ask for a text\-based output:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dwalk \-\-text \-\-output list.txt /path/to/walk
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The text\-based output is lossy, and it cannot be read back in to a tool.
+If you want both, save to binary format first, then read the binary file to convert it to text.:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dwalk \-\-output list.mfu /path/to/walk
+dwalk \-\-input list.mfu \-\-text \-\-output list.txt
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+dwalk also provides a sort option to order items in the list in various ways,
+e.g., to order the list by username, then by access time:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dwalk \-\-input list.mfu \-\-sort user,atime \-\-output user_atime.mfu
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+To order items from largest to smallest number of bytes:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dwalk \-\-input list.mfu \-\-sort \(aq\-size\(aq \-\-output big_to_small.mfu
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+dfind can be used to filter items with a string of find\-like expressions,
+e.g., files owned by user1 that are bigger than 100GB:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dfind \-\-input list.mfu \-\-user user1 \-\-size +100GB \-\-output user1_over_100GB.mfu
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+dchmod is like chmod and chgrp in one, so one can change uid/gid/mode with a single command:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dchmod \-\-group grp1 \-\-mode g+rw /path/to/walk
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+drm is like “rm \-rf” but in parallel:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+drm /path/to/remove
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+dbcast provides an efficient way to broadcast a file to all compute nodes,
+e.g., upload a tar file of a dataset to an SSD local to each compute node:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dbcast /path/to/file.dat /ssd/file.dat
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+dsync is the recommended way to make a copy a large set of files:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dsync /path/src /path/dest
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+For large directory trees, the –batch\-files option offers a type of checkpoint.
+It moves files in batches, and if interrupted, a restart picks up from the last completed batch.:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+dsync \-\-batch\-files 100000 /path/src /path/dest
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The tools can be composed in various ways using the –input and –output options.
+For example, the following sequence of commands executes a purge operation,
+which deletes any file that has not been accessed in the past 180 days.:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# walk directory to stat all files, record list in file
+dwalk \-\-output list.mfu /path/to/walk
+
+# filter list to identify all regular files that were last accessed over 180 days ago
+dfind \-\-input list.mfu \-\-type f \-\-atime +180 \-\-output purgelist.mfu
+
+# delete all files in the purge list
+drm \-\-input purgelist.mfu
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Common Library \- libmfu
+.sp
+Functionality that is common to multiple tools is moved to the common library,
+libmfu. This goal of this library is to make it easy to develop new tools and
+to provide consistent behavior across tools in the suite. The library can also
+be useful to end applications, e.g., to efficiently create or remove a large
+directory tree in a portable way across different parallel file systems.
+.SS libmfu: the mpiFileUtils common library
+.sp
+The mpiFileUtils common library defines data structures and methods on those
+data structures that makes it easier to develop new tools or for use within HPC
+applications to provide portable, performant implementations across file
+systems common in HPC centers.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+#include "mfu.h"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+This file includes all other necessary headers.
+.SS mfu_flist
+.sp
+The key data structure in libmfu is a distributed file list called mfu_flist.
+This structure represents a list of files, each with stat\-like metadata, that
+is distributed among a set of MPI ranks.
+.sp
+The library contains functions for creating and operating on these lists. For
+example, one may create a list by recursively walking an existing directory or
+by inserting new entries one at a time. Given a list as input, functions exist
+to create corresponding entries (inodes) on the file system or to delete the
+list of files. One may filter, sort, and remap entries. One can copy a list of
+entries from one location to another or compare corresponding entries across
+two different lists. A file list can be serialized and written to or read from
+a file.
+.sp
+Each MPI rank “owns” a portion of the list, and there are routines to step
+through the entries owned by that process. This portion is referred to as the
+“local” list. Functions exist to get and set properties of the items in the
+local list, for example to get the path name, type, and size of a file.
+Functions dealing with the local list can be called by the MPI process
+independently of other MPI processes.
+.sp
+Other functions operate on the global list in a collective fashion, such as
+deleting all items in a file list. All processes in the MPI job must invoke
+these functions simultaneously.
+.sp
+For full details, see \fI\%mfu_flist.h\fP
+and refer to its usage in existing tools.
+.SS mfu_path
+.sp
+mpiFileUtils represents file paths with the \fI\%mfu_path\fP
+structure. Functions are available to manipulate paths to prepend and append
+entries, to slice paths into pieces, and to compute relative paths.
+.SS mfu_param_path
+.sp
+Path names provided by the user on the command line (parameters) are handled
+through the \fI\%mfu_param_path\fP
+structure. Such paths may have to be checked for existence and to determine
+their type (file or directory). Additionally, the user may specify many such
+paths through invocations involving shell wildcards, so functions are available
+to check long lists of paths in parallel.
+.SS mfu_io
+.sp
+The \fI\%mfu_io.h\fP
+functions provide wrappers for many POSIX\-IO functions. This is helpful for
+checking error codes in a consistent manner and automating retries on failed
+I/O calls. One should use the wrappers in mfu_io if available, and if not, one
+should consider adding the missing wrapper.
+.SS mfu_util
+.sp
+The \fI\%mfu_util.h\fP
+functions provide wrappers for error reporting and memory allocation.
+.SH AUTHOR
+HPC
+.SH COPYRIGHT
+2022, LLNL/LANL/UT-Battelle/DDN
+.\" Generated by docutils manpage writer.
+.

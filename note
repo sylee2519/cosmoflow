@@ -1,0 +1,36 @@
+
+10/16: 
+	- source bash script to load env, load soon's venv.
+	- CMake works
+	- Need to correct errors from 'make'
+	- tried interactive mode ex) salloc -A stf008 -N 1 -t 0:05:00
+
+10/18:
+	- require module load rocm/6.0.0 to "cmake" work
+	- mercury not recognized at "make"
+	- tried with soon venv, /HVAC, cce... etc does not work
+
+10/20:
+	- cmake & make succeeded
+	- cmake  -DCMAKE_C_COMPILER=/opt/cray/pe/gcc/12.2.0/snos/bin/gcc   -DCMAKE_CXX_COMPILER=/opt/cray/pe/gcc/12.2.0/snos/bin/g++ ..
+	- and library path changed (maybe issue with the mercury version?)
+	- and get the node first
+
+10/21:
+	- HVAC server worked, but not client
+	- For Server to run, need to export my custom envs, ex) MY_JOBID, HVAC_LOG_DIR
+
+10/22:
+	- HVAC Client worked
+	- use PMI instead of PMIX
+	- 
+
+10/23:
+	- trying to run cosmoflow
+
+10/24:
+
+	- successfully run cosmoflow (without HVAC)
+	- #export http_proxy=http://proxy.ccs.ornl.gov:3128/
+		#export https_proxy=http://proxy.ccs.ornl.gov:3128/ 
+	- these lines need to be removed from script
